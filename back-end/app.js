@@ -9,6 +9,9 @@ const port = 3000;
 
 dotenv.config();
 
+// setto i file statici
+app.use(express.static("public"));
+
 // Abilita CORS per tutte le route
 app.use(cors());
 

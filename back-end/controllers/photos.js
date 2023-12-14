@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const { photoSchema } = require('../validationSchemas');
 
 async function index(req, res) {
     const data = await prisma.photo.findMany({
@@ -33,15 +34,38 @@ async function show(req, res) {
 
 async function store(req, res) {
     const datiInIngresso = req.body;
+    console.log(datiInIngresso);
+
+    // Validazione degli input
+    const { error } = photoSchema.validate(datiInIngresso);
+
+    if (error) {
+        return res.status(400).json({ error: error.details[0].message });
+    }
+
+    const file = req.file;
+    if (file) {
+        datiInIngresso.image = file.filename;
+    }
 
     const newPhoto = await prisma.photo.create({
         data: {
             title: datiInIngresso.title,
             description: datiInIngresso.description,
             image: datiInIngresso.image,
-            visible: datiInIngresso.visible
+            visible: datiInIngresso.visible,
+            categories: {
+                connect: datiInIngresso.categories.map((idCategories) => ({
+                    id: +idCategories,
+                })),
+            },
         }
-    })
+    });
+
+    if (!newPhoto) {
+        // next(new PrismaExeption("Errore nella creazione della photo", 400));
+        throw new Error("Errore nella creazione della photo");
+    }
 
     return res.json(newPhoto);
 }
@@ -56,6 +80,13 @@ async function update(req, res) {
     }
 
     const datiInIngresso = req.body;
+
+    // Validazione degli input
+    const { error } = photoSchema.validate(datiInIngresso);
+
+    if (error) {
+        return res.status(400).json({ error: error.details[0].message });
+    }
 
     // controllo che quella photo esista
     const photo = await prisma.photo.findUnique({
