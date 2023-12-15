@@ -12,4 +12,16 @@ const categorySchema = Joi.object({
     name: Joi.string().required(),
 });
 
-module.exports = { photoSchema, categorySchema };
+const userSchema = Joi.object({
+    username: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+    photos: Joi.array().items(Joi.number()),
+});
+
+const messageSchema = Joi.object({
+    content: Joi.string().required(),
+    email: Joi.string().email().required()
+});
+
+module.exports = { photoSchema, categorySchema, userSchema, messageSchema };

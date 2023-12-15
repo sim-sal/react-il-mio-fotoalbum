@@ -19,6 +19,8 @@ model Photo {
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   categories  Category[]
+  userId      Int?
+  user        User?      @relation(fields: [userId], references: [id])
 
   @@map("photos")
 }
@@ -31,4 +33,26 @@ model Category {
   updatedAt DateTime @updatedAt
 
   @@map("categories")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @db.VarChar(255)
+  email     String   @db.VarChar(255)
+  password  String
+  photos    Photo[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  content   String   @db.Text
+  email     String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("messages")
 }

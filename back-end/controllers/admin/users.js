@@ -1,9 +1,9 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-const { categorySchema } = require('../validationSchemas');
+const { userSchema } = require('../../validationSchemas');
 
 async function index(req, res) {
-    const data = await prisma.category.findMany({
+    const data = await prisma.user.findMany({
         include: {
             photos: true
         },
@@ -15,7 +15,7 @@ async function index(req, res) {
 async function show(req, res) {
     const { id } = req.params;
 
-    const data = await prisma.category.findUnique({
+    const data = await prisma.user.findUnique({
         where: {
             id: +id,
         },
@@ -35,18 +35,20 @@ async function store(req, res) {
     const datiInIngresso = req.body;
 
     // Validazione degli input
-    const { error } = categorySchema.validate(datiInIngresso);
+    const { error } = userSchema.validate(datiInIngresso);
 
     if (error) {
         return res.status(400).json({ error: error.details[0].message });
     }
 
 
-    // creazione della categoria
+    // creazione dello user
 
-    const newCategory = await prisma.category.create({
+    const newUser = await prisma.user.create({
         data: {
-            name: datiInIngresso.name
+            username: datiInIngresso.username,
+            email: datiInIngresso.email,
+            password: datiInIngresso.password
         },
         include: {
             photos: {
@@ -61,7 +63,7 @@ async function store(req, res) {
         },
     })
 
-    return res.json(newCategory);
+    return res.json(newUser);
 }
 
 async function update(req, res) {
@@ -76,31 +78,31 @@ async function update(req, res) {
     const datiInIngresso = req.body;
 
     // Validazione degli input
-    const { error } = categorySchema.validate(datiInIngresso);
+    const { error } = userSchema.validate(datiInIngresso);
 
     if (error) {
         return res.status(400).json({ error: error.details[0].message });
     }
 
-    // controllo che quella category esista
-    const category = await prisma.category.findUnique({
+    // controllo che lo user esista
+    const user = await prisma.user.findUnique({
         where: {
             id: id,
         },
     });
 
-    if (!category) {
-        throw new Error('category Not found');
+    if (!user) {
+        throw new Error('user Not found');
     }
 
-    const categoryAggiornata = await prisma.category.update({
+    const userAggiornata = await prisma.user.update({
         data: datiInIngresso,
         where: {
             id: id,
         },
     });
 
-    return res.json(categoryAggiornata);
+    return res.json(userAggiornato);
 }
 
 async function destroy(req, res) {
@@ -113,7 +115,7 @@ async function destroy(req, res) {
         },
     });
 
-    return res.json({ message: "Category eliminata" });
+    return res.json({ message: "User eliminato" });
 }
 
 module.exports = {

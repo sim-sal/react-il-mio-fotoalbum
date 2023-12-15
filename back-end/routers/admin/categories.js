@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const categoriesController = require("../controllers/categories");
+const categoriesController = require("../../controllers/admin/categories");
 
 // GET /categories
 router.get('/', categoriesController.index);

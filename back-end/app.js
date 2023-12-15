@@ -1,7 +1,13 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const photosRouter = require("./routers/photos");
-const categoriesRouter = require("./routers/categories");
+// admin
+const photosRouterAdmin = require("./routers/admin/photos");
+const categoriesRouterAdmin = require("./routers/admin/categories");
+const usersRouterAdmin = require("./routers/admin/users");
+const messagesRouterAdmin = require("./routers/admin/messages");
+// guets
+const photosRouterGuests = require("./routers/guests/photos");
+const messagesRouterGuests = require("./routers/guests/messages");
 
 const cors = require('cors');
 const app = express();
@@ -21,8 +27,19 @@ app.listen(port, () => {
     console.log(`App attiva su http://localhost:${port}`);
 })
 
-// ROUTERS
+// ROUTERS ADMIN
 // photos
-app.use("/photos", photosRouter);
+app.use("/admin/photos", photosRouterAdmin);
 // categories
-app.use("/categories", categoriesRouter);
+app.use("/admin/categories", categoriesRouterAdmin);
+//user
+app.use("/admin/users", usersRouterAdmin);
+//message
+app.use("/admin/messages", messagesRouterAdmin);
+
+
+// ROUTERS PUBLIC
+// photos
+app.use("/photos", photosRouterGuests);
+//message
+app.use("/messages", messagesRouterGuests);
