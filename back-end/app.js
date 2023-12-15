@@ -5,7 +5,8 @@ const photosRouterAdmin = require("./routers/admin/photos");
 const categoriesRouterAdmin = require("./routers/admin/categories");
 const usersRouterAdmin = require("./routers/admin/users");
 const messagesRouterAdmin = require("./routers/admin/messages");
-// guets
+const authRouter = require("./routers/admin/auth")
+// guests
 const photosRouterGuests = require("./routers/guests/photos");
 const messagesRouterGuests = require("./routers/guests/messages");
 
@@ -36,6 +37,9 @@ app.use("/admin/categories", categoriesRouterAdmin);
 app.use("/admin/users", usersRouterAdmin);
 //message
 app.use("/admin/messages", messagesRouterAdmin);
+
+//auth
+app.use("", authRouter);
 
 
 // ROUTERS PUBLIC

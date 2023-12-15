@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require("multer");
 const photosController = require('../../controllers/admin/photos');
+const authHandler = require("../../middlewares/authHandler")
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -20,15 +21,16 @@ router.get('/:id', photosController.show);
 
 // POST /photos
 router.post('/',
+    authHandler,
     multer({ storage: storage }).single("image"),
     photosController.store
 );
 
 // PUT /photos/:id
-router.put('/:id', photosController.update);
+router.put('/:id', authHandler, photosController.update);
 
 // DELETE /photos/:id
-router.delete('/:id', photosController.destroy);
+router.delete('/:id', authHandler, photosController.destroy);
 
 
 module.exports = router;
