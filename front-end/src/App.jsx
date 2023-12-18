@@ -6,6 +6,7 @@ import AppDashboard from "./pages/AppDashboard";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./middleware/AppPrivateRoutes";
 import { AuthProvider } from "./contexts/AuthContext";
+import AppContacts from "./pages/AppContacts";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               }
             />
           </Route>
+          <Route path="/contacts" element={<AppContacts />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

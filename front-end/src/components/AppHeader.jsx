@@ -25,9 +25,9 @@ export default function AppHeader() {
                             <li className="mx-3 text-white">Home</li>
                         </NavLink>
 
-                        <li className="mx-3 text-white">
-                            Contact
-                        </li>
+                        <NavLink to="/contacts" className="text-decoration-none">
+                            <li className="mx-3 text-white">Contacts</li>
+                        </NavLink>
 
                         <NavLink to="/dashboard" className="text-decoration-none">
                             <li className={`mx-3 text-white ${isLogged ? '' : 'd-none'}`}>
