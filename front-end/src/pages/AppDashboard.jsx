@@ -84,7 +84,7 @@ export default function AppDashboard() {
         try {
             await axios.delete(`http://localhost:3000/admin/photos/${photoId}`, {
                 headers: {
-                    Authorization: `Bearer ${authToken}`, // Aggiungi il token alle intestazioni della richiesta
+                    Authorization: `Bearer ${localStorage.getItem("token")}`, // Aggiungi il token alle intestazioni della richiesta
                 },
             });
             // Dopo aver eliminato la foto, aggiorna lo stato eliminando la foto dalla lista
