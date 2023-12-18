@@ -11,6 +11,7 @@
     border-radius: 5px;
     padding-right: 10px;
     padding-left: 10px;
+    font-size: 30px;
 }
 
 .add_button:hover {
@@ -47,6 +48,7 @@
     border-radius: 5px;
     padding-right: 10px;
     padding-left: 10px;
+    font-size: 25px;
 }
 
 .edit_button:hover {
