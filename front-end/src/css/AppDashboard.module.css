@@ -66,11 +66,11 @@
     background-color: rgb(179, 0, 0);
 }
 
-.editFormContainer.show {
+.add_edit_FormContainer.show {
     display: block;
 }
 
-.editFormContainer {
+.add_edit_FormContainer {
     position: fixed;
     top: 50%;
     left: 50%;
