@@ -62,6 +62,11 @@ export default function AppDashboard() {
         }
     };
 
+    const closeEditForm = () => {
+        setIsEditFormVisible(false);
+        setEditPhoto(null);
+    };
+
     // async function removePhoto(photoId) {
     //     const response = await fetch(`http://localhost:3000/admin/photos/${photoId}`, {
     //         method: "delete",
@@ -77,17 +82,16 @@ export default function AppDashboard() {
 
     const handleDeleteClick = async (photoId) => {
         try {
-            await axios.delete(`http://localhost:3000/admin/photos/${photoId}`);
+            await axios.delete(`http://localhost:3000/admin/photos/${photoId}`, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`, // Aggiungi il token alle intestazioni della richiesta
+                },
+            });
             // Dopo aver eliminato la foto, aggiorna lo stato eliminando la foto dalla lista
             setPhotos((prevPhotos) => prevPhotos.filter((p) => p.id !== photoId));
         } catch (error) {
             console.error("Error deleting photo:", error);
         }
-    };
-
-    const closeEditForm = () => {
-        setIsEditFormVisible(false);
-        setEditPhoto(null);
     };
 
     return (
@@ -139,7 +143,7 @@ export default function AppDashboard() {
 
             {
                 isEditFormVisible && (
-                    <div >
+                    <div className={`${style.editFormContainer} ${style.show}`}>
                         <div>
                             <h2>Edit Photo</h2>
                             <form
@@ -151,7 +155,7 @@ export default function AppDashboard() {
                                 }}
                             >
                                 <div >
-                                    <label>Title:</label>
+                                    <label><strong>Title:</strong></label>
                                     <input
                                         type="text"
                                         name="title"
@@ -160,7 +164,7 @@ export default function AppDashboard() {
                                     />
                                 </div>
                                 <div >
-                                    <label>Description:</label>
+                                    <label><strong>Description:</strong></label>
                                     <textarea
                                         name="description"
                                         defaultValue={editPhoto.description}
@@ -168,32 +172,37 @@ export default function AppDashboard() {
                                     ></textarea>
                                 </div>
                                 <div>
-                                    <label>Categories:</label>
-                                    {categories.map((category) => (
-                                        <div key={category.id}>
-                                            <input
-                                                type="checkbox"
-                                                id={`category_${category.id}`}
-                                                name="categories"
-                                                value={category.id}
-                                                defaultChecked={editPhoto.categories.some(
-                                                    (cat) => cat.id === category.id
-                                                )}
-                                            />
-                                            <label htmlFor={`category_${category.id}`}>
-                                                {category.name}
-                                            </label>
-                                        </div>
-                                    ))}
+                                    <label><strong>Categories:</strong></label>
+                                    <div className="row">
+                                        {categories.map((category) => (
+                                            <div className="col-4" key={category.id}>
+                                                <input
+                                                    type="checkbox"
+                                                    id={`category_${category.id}`}
+                                                    name="categories"
+                                                    value={category.id}
+                                                    defaultChecked={editPhoto.categories.some(
+                                                        (cat) => cat.id === category.id
+                                                    )}
+                                                />
+                                                <label htmlFor={`category_${category.id}`}>
+                                                    {category.name}
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
+
                                 </div>
 
-                                <div>
-                                    <button type="submit">Save</button>
+                                <div className="d-flex justify-content-between mt-4">
+                                    <button className={style.save_button} type="submit">Save</button>
+
+                                    <button onClick={closeEditForm} className={style.dismit_button}>
+                                        X
+                                    </button>
                                 </div>
+
                             </form>
-                            <button onClick={closeEditForm}>
-                                x
-                            </button>
                         </div>
                     </div>
                 )

@@ -24,11 +24,6 @@ export default function AppHeader() {
                         <NavLink to="/" className="text-decoration-none">
                             <li className="mx-3 text-white">Home</li>
                         </NavLink>
-                        <NavLink to="/album" className="text-decoration-none">
-                            <li className="mx-3 text-white">
-                                Album
-                            </li>
-                        </NavLink>
 
                         <li className="mx-3 text-white">
                             Contact
