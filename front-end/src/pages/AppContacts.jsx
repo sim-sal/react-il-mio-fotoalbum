@@ -43,7 +43,7 @@ export default function AppContacts() {
     };
 
     return (
-        <div className="container-fluid">
+        <div className={`container-fluid ${style.container_fluid_mod}`}>
             <div className={style.my_container}>
                 <div className={`${style.contacts_container}`}>
                     <div className={style.contacts_form_container}>

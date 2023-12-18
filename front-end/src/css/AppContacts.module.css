@@ -1,10 +1,14 @@
+.container_fluid_mod {
+    background-color: rgb(170, 170, 170);
+    padding-top: 0;
+}
+
 .my_container {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 100px);
     position: relative;
-    margin-top: 10px;
     font-family: 'Nova Square', sans-serif;
     font-family: 'PT Sans', sans-serif;
     font-family: 'Roboto Condensed', sans-serif;
