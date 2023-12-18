@@ -210,7 +210,8 @@ export default function AppDashboard() {
             )}
 
             <button className={style.add_button} onClick={openAddForm}>
-                <span><strong>Add Photo</strong></span>
+                <span className="p-2"><strong>Add Photo</strong></span>
+                <FontAwesomeIcon icon="fa-solid fa-square-plus" />
             </button>
 
             <div className="container">
