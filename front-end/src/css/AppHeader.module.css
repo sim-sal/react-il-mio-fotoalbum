@@ -1,0 +1,28 @@
+.my_header_container {
+    height: 100px;
+    background-image: url("/header_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    font-family: 'Nova Square', sans-serif;
+    font-family: 'PT Sans', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.logo_and_title {
+    width: 50%;
+}
+
+.header_icon {
+    font-size: 40px;
+    color: white;
+    margin-right: 10px;
+}
+
+.header_menu {
+    list-style: none;
+}
+
+.header_menu a[class*="active"] {
+    border-radius: 5px;
+    border-bottom: 1px solid white;
+}

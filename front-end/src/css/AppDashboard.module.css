@@ -1,0 +1,67 @@
+.dashboard {
+    font-family: 'Nova Square', sans-serif;
+    font-family: 'PT Sans', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.add_button {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.add_button:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.mod_card {
+    box-shadow: 5px 15px 20px black;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.card_img {
+    width: 100%;
+    object-fit: cover;
+    height: 300px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.card_main {
+    padding: 10px;
+    position: relative;
+}
+
+.card_buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit_button {
+    background-color: rgb(93, 197, 93);
+    border: none;
+    border-radius: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.edit_button:hover {
+    background-color: green;
+}
+
+.delete_button {
+    background-color: rgb(255, 68, 68);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.delete_button:hover {
+    background-color: rgb(179, 0, 0);
+}
